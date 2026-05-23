@@ -25,6 +25,12 @@ After: Bug in auth middleware. Token expiry check use `<` not `<=`. Fix:
 
 ## Install
 
+### From npm
+
+```bash
+pi install @viartemev/pi-caveman
+```
+
 ### From GitHub
 
 ```bash
