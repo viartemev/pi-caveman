@@ -6,7 +6,7 @@
 
 Ultra-compressed communication mode for [`pi`](https://github.com/mariozechner/pi-coding-agent): fewer tokens, same technical substance.
 
-`pi-caveman` packages the original [`JuliusBrussee/caveman`](https://github.com/JuliusBrussee/caveman) prompt/skills as a native pi package with persistent modes, slash commands, and bundled helper skills.
+`pi-caveman` packages the original [`JuliusBrussee/caveman`](https://github.com/JuliusBrussee/caveman) response style as a native pi package. Install it, and every agent response becomes shorter by default.
 
 ## Why
 
@@ -19,107 +19,51 @@ After: Bug in auth middleware. Token expiry check use `<` not `<=`. Fix:
 
 ## Features
 
-- Persistent caveman response mode across turns
-- Intensity levels: `lite`, `full`, `ultra`
-- Slash commands for quick mode switching
-- Rock-themed help/status output (`🪨`), no persistent footer badge
-- Natural-language enable/disable phrases, including Russian terse triggers
-- Bundled skills:
-  - terse commit messages
-  - terse code review comments
-  - markdown memory compression
+- Always-on caveman response style while package is installed
+- No per-session state, config, or toggles
+- Short system prompt injected before every agent turn
 - Static `/caveman-help` command without model call
-- Default mode via env/config
-- Upstream sync script for original caveman assets
 
 ## Install
 
 ### From GitHub
 
 ```bash
-pi install git:github.com/viartemev/caveman-pi-extension
+pi install git:github.com/viartemev/pi-caveman
 ```
 
 Project-local install:
 
 ```bash
-pi install -l git:github.com/viartemev/caveman-pi-extension
+pi install -l git:github.com/viartemev/pi-caveman
 ```
 
 ### From local clone
 
 ```bash
-git clone git@github.com:viartemev/caveman-pi-extension.git
-pi install ./caveman-pi-extension
+git clone git@github.com:viartemev/pi-caveman.git
+pi install ./pi-caveman
 ```
 
 Try without installing:
 
 ```bash
-pi -e ./caveman-pi-extension
+pi -e ./pi-caveman
 ```
 
-## Commands
+## Command
 
 | Command | Action |
 | --- | --- |
-| `/caveman` | Enable default `full` mode |
-| `/caveman lite` | Tight but normal grammar |
-| `/caveman full` | Classic caveman: fragments, no filler |
-| `/caveman ultra` | Maximum terse technical shorthand |
-| `/caveman off` | Disable caveman mode |
-| `/caveman toggle` | Toggle between off and default/full |
-| `/caveman status` | Show rock-themed caveman status |
-| `/caveman-default <mode>` | Save default mode to `~/.config/caveman/config.json` |
 | `/caveman-help` | Show rock-themed quick reference without model call |
-| `/caveman-commit [context]` | Generate terse Conventional Commit message |
-| `/caveman-review [context]` | Generate one-line actionable review comments |
-| `/caveman-compress <filepath>` | Compress markdown/memory file |
 
-Natural-language control also works:
-
-```text
-stop caveman
-normal mode
-caveman off
-caveman mode
-use caveman
-be brief
-будь краток
-без воды
-короче
-```
-
-## Config
-
-Default mode resolution:
-
-1. `CAVEMAN_DEFAULT_MODE`
-2. `~/.config/caveman/config.json`
-3. `full`
-
-Example:
-
-```bash
-export CAVEMAN_DEFAULT_MODE=ultra
-```
-
-```json
-{ "defaultMode": "lite" }
-```
-
-Use `off` to keep commands installed but disable auto-activation.
+To stop caveman mode, disable or uninstall this pi package.
 
 ## Package layout
 
 ```text
 extensions/caveman.ts       # pi extension adapter + compact mode prompts
-skills/caveman-commit       # terse commit skill
-skills/caveman-review       # terse review skill
-caveman-compress/SKILL.md   # memory compression skill
-caveman-compress/scripts/   # compression helper scripts
-scripts/sync-upstream.sh    # syncs upstream caveman assets
-vendor/caveman              # upstream git submodule
+skills/caveman              # caveman response-style skill
 package.json                # pi package manifest
 ```
 
@@ -127,37 +71,10 @@ package.json                # pi package manifest
 
 The pi extension hooks into:
 
-- `session_start` — restores mode without footer status noise
-- `input` — handles enable/disable phrases
 - `before_agent_start` — injects compact active-mode rules every turn
-- `registerCommand` — registers slash commands
+- `registerCommand` — registers `/caveman-help`
 
-Skills are exposed by `package.json` manifest, not by extension runtime discovery.
-
-## Updating from upstream caveman
-
-This repo tracks upstream as a git submodule:
-
-```text
-vendor/caveman -> https://github.com/JuliusBrussee/caveman
-```
-
-Update bundled skills/scripts:
-
-```bash
-git submodule update --init --recursive
-npm run update:upstream
-```
-
-This syncs pi-needed assets only:
-
-- `skills/caveman*`
-- `caveman-compress/SKILL.md`
-- `caveman-compress/scripts/*`
-
-Only `caveman-commit`, `caveman-review`, and `caveman-compress` are loaded as pi skills by default. Base caveman/help prompts remain in repo for upstream sync/reference; extension handles them directly.
-
-The pi adapter stays in `extensions/caveman.ts`.
+The base caveman skill is exposed by `package.json`; the extension makes the style always active.
 
 ## License
 

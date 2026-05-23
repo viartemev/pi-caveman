@@ -1,7 +1,7 @@
 {
-  "name": "caveman-pi-extension",
+  "name": "pi-caveman",
   "version": "0.3.0",
-  "description": "Caveman mode for pi: ultra-compressed responses, terse commits, terse reviews, and memory compression.",
+  "description": "Caveman mode for pi: ultra-compressed responses that save tokens.",
   "type": "module",
   "license": "MIT",
   "keywords": [
@@ -13,21 +13,14 @@
   ],
   "files": [
     "extensions/",
-    "skills/caveman-commit/",
-    "skills/caveman-review/",
-    "caveman-compress/",
-    "scripts/",
+    "skills/caveman/",
     "README.md",
     "LICENSE"
   ],
-  "homepage": "https://github.com/viartemev/caveman-pi-extension#readme",
+  "homepage": "https://github.com/viartemev/pi-caveman#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/viartemev/caveman-pi-extension.git"
-  },
-  "scripts": {
-    "sync:upstream": "bash scripts/sync-upstream.sh",
-    "update:upstream": "git submodule update --remote --merge vendor/caveman && bash scripts/sync-upstream.sh"
+    "url": "git+https://github.com/viartemev/pi-caveman.git"
   },
   "peerDependencies": {
     "@mariozechner/pi-coding-agent": "*"
@@ -37,9 +30,7 @@
       "./extensions/caveman.ts"
     ],
     "skills": [
-      "./skills/caveman-commit",
-      "./skills/caveman-review",
-      "./caveman-compress"
+      "./skills/caveman"
     ]
   }
 }
