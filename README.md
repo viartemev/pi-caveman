@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![pi package](https://img.shields.io/badge/pi-package-blue)](https://github.com/mariozechner/pi-coding-agent)
-[![Version](https://img.shields.io/badge/version-0.3.0-green)](package.json)
+[![Version](https://img.shields.io/badge/version-0.3.1-green)](package.json)
 
 Ultra-compressed communication mode for [`pi`](https://github.com/mariozechner/pi-coding-agent): fewer tokens, same technical substance.
 
@@ -20,9 +20,8 @@ After: Bug in auth middleware. Token expiry check use `<` not `<=`. Fix:
 ## Features
 
 - Always-on caveman response style while package is installed
-- No per-session state, config, or toggles
+- No commands, per-session state, config, or toggles
 - Short system prompt injected before every agent turn
-- Static `/caveman-help` command without model call
 
 ## Install
 
@@ -51,12 +50,6 @@ Try without installing:
 pi -e ./pi-caveman
 ```
 
-## Command
-
-| Command | Action |
-| --- | --- |
-| `/caveman-help` | Show rock-themed quick reference without model call |
-
 To stop caveman mode, disable or uninstall this pi package.
 
 ## Package layout
@@ -72,7 +65,6 @@ package.json                # pi package manifest
 The pi extension hooks into:
 
 - `before_agent_start` — injects compact active-mode rules every turn
-- `registerCommand` — registers `/caveman-help`
 
 The base caveman skill is exposed by `package.json`; the extension makes the style always active.
 

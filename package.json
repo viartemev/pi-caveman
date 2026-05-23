@@ -1,6 +1,6 @@
 {
   "name": "pi-caveman",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Caveman mode for pi: ultra-compressed responses that save tokens.",
   "type": "module",
   "license": "MIT",
