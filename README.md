@@ -28,7 +28,7 @@ After: Bug in auth middleware. Token expiry check use `<` not `<=`. Fix:
 ### Recommended: npm
 
 ```bash
-pi install @viartemev/pi-caveman
+pi install npm:@viartemev/pi-caveman
 ```
 
 After install, nothing else is needed. Caveman mode is always active while the package is enabled.
